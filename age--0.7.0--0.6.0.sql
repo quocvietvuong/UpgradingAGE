@@ -5,9 +5,14 @@ DROP FUNCTION ag_catalog.create_vlabel(graph_name name, label_name name) CASCADE
 
 DROP FUNCTION ag_catalog.create_elabel(graph_name name, label_name name) CASCADE;
 
+UPDATE pg_type SET
+typsend = 0,
+typreceive = 0
+WHERE typname = 'graphid';
+
 DROP FUNCTION ag_catalog.graphid_send(graphid) CASCADE;
 
-DROP FUNCTION ag_catalog.graphid_recv(internal) CASCADE;
+-- DROP FUNCTION ag_catalog.graphid_recv(internal) CASCADE;
 
 -- undo UPDATE typname = 'graphid';
 
@@ -50,6 +55,6 @@ DROP FUNCTION ag_catalog.age_relationships(agtype) CASCADE;
 
 DROP FUNCTION ag_catalog.age_range(variadic "any") CASCADE;
 
-DROP FUNCTION ag_catalog.age_unnest(agtype, block_types boolean = false) CASCADE;
+DROP FUNCTION ag_catalog.age_unnest(agtype, boolean) CASCADE;
 
 -- End
