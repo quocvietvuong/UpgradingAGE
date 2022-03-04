@@ -1,5 +1,5 @@
 -- complain if script is sourced in psql, rather than via CREATE EXTENSION
-\echo Use "ALTER EXTENSION age UPDATE TO '0.5.0'" to load this file. \quit
+\echo Use "ALTER EXTENSION age UPDATE TO '1.0.0'" to load this file. \quit
 
 CREATE FUNCTION ag_catalog.load_labels_from_file(graph_name name,
                                             label_name name,
