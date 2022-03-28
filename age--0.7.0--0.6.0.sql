@@ -12,9 +12,23 @@ WHERE typname = 'graphid';
 
 DROP FUNCTION ag_catalog.graphid_send(graphid) CASCADE;
 
--- DROP FUNCTION ag_catalog.graphid_recv(internal) CASCADE;
+DROP FUNCTION ag_catalog.graphid_recv(internal) CASCADE;
 
 -- undo UPDATE typname = 'graphid';
+
+UPDATE pg_type SET
+typsend = 0,
+typreceive = 0
+WHERE typname = 'agtype';
+
+UPDATE pg_catalog.pg_type SET
+typsend = 0,
+typreceive = 0
+WHERE typname = 'agtype';
+
+DROP FUNCTION ag_catalog.agtype_send(graphid) CASCADE;
+
+DROP FUNCTION ag_catalog.agtype_recv(internal) CASCADE;
 
 -- undo UPDATE typename = 'agtype';
 
@@ -54,7 +68,5 @@ DROP FUNCTION ag_catalog.age_nodes(agtype) CASCADE;
 DROP FUNCTION ag_catalog.age_relationships(agtype) CASCADE;
 
 DROP FUNCTION ag_catalog.age_range(variadic "any") CASCADE;
-
-DROP FUNCTION ag_catalog.age_unnest(agtype, boolean) CASCADE;
 
 -- End
